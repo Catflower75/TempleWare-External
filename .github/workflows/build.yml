@@ -20,9 +20,12 @@ jobs:
       run: |
         msbuild TempleWare-External.sln -t:Rebuild -p:Configuration=Release -p:Platform=x64
 
+    - name: Debug: Check for generated executable
+      run: dir "D:\a\TempleWare-External\TempleWare-External\x64\Release\"
+
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:
         name: Compiled-Binaries
         path: |
-          D:\a\TempleWare-External\x64\Release\TempleWare-External.exe
+          D:\a\TempleWare-External\TempleWare-External\x64\Release\TempleWare-External.exe
