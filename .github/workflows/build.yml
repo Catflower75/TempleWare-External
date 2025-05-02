@@ -1,4 +1,4 @@
-name: build-check x64 release
+name: Build and Check x64 Release
 
 on:
   push:
@@ -11,21 +11,22 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Building project
+    - name: Build Project
       run: |
         msbuild TempleWare-External.sln -t:Rebuild -p:Configuration=Release -p:Platform=x64
 
-    - name: Debug: Check for generated executable
-      run: dir "D:\a\TempleWare-External\TempleWare-External\x64\Release\"
+    - name: Verify Executable
+      run: dir "D:/a/TempleWare-External/TempleWare-External/x64/Release/"
 
-    - name: Archive artifacts
+    - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: Compiled-Binaries
         path: |
-          D:\a\TempleWare-External\TempleWare-External\x64\Release\TempleWare-External.exe
+          D:/a/TempleWare-External/TempleWare-External/x64/Release/TempleWare-External.exe
